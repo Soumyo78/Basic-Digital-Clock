@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+        #digit{
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 50px 50px 50px 50px;
+            -moz-border-radius: 50px 50px 50px 50px;
+            -webkit-border-radius: 50px 50px 50px 50px;
+            border: 25px solid #000000;
+            background-color: aqua;
+            text-align: center;
+            padding: 20px;
+            font-size: 90px;
+            max-width: 700px;
+            margin: auto;
+            word-spacing: 50px;
+        }
+    </style>
+    <title>Digital Clock</title>
+</head>
+<body onload="startClock()">
+    
+    <h1 id="digit"></h1>
+
+
+    <script>
+        function startClock(){
+            var date = new Date();
+            var h = date.getHours();
+            var m = date.getMinutes();
+            var s = date.getSeconds();
+
+            var am_pm = "AM";
+            am_pm = amOrPM(h, am_pm);
+            h = make12hrs(h);
+            h = checkHours(h);
+            m = checkHours(m);
+            s = checkHours(s);
+
+            document.getElementById('digit').innerHTML = h+":"+m+":"+s+"-"+am_pm;
+
+            var t = setTimeout(startClock, 500);
+
+        }
+
+        function checkHours(i){
+            if(i<10){
+                i = "0"+i;
+            }
+            return i;
+        }
+
+        function make12hrs(j, k){
+            if(j > 12){
+                j = j - 12;
+                k = "PM";
+            }
+            return j;
+        }
+
+        function amOrPM(j, k){
+            if(j > 12){
+                j = j - 12;
+                k = "PM";
+            }
+            return k;
+        }
+    </script>
+</body>
+</html>
